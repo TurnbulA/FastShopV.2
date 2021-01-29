@@ -1,0 +1,49 @@
+﻿@page
+@model FatsShop_2.Pages.ShopCart.IndexModel
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Cart</h1>
+
+<!--<p>
+    <a asp-page="Create">Create New</a>
+</p>-->
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart[0].CartProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart[0].CartQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart[0].CartPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Cart) {
+        <tr>
+            <td class="cartProductName">
+                @Html.DisplayFor(modelItem => item.CartProductName)
+            </td>
+            <td class="cartProductQuantity">
+                @Html.DisplayFor(modelItem => item.CartQuantity)
+            </td>
+            <td class="cartProductPrice">
+               @Html.DisplayFor(modelItem => item.CartPrice)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.CartID" onclick="editDetails(event)">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.CartID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.CartID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

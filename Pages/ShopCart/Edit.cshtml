@@ -1,0 +1,70 @@
+﻿@page
+@model FatsShop_2.Pages.ShopCart.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Cart</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Cart.CartID" />
+            <div class="form-group" style="display:none;">
+                <label asp-for="Cart.ProductID" class="control-label"></label>
+                <select asp-for="Cart.ProductID" class="form-control" asp-items="ViewBag.ProductID"></select>
+                <span asp-validation-for="Cart.ProductID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cart.CartPrice" class="control-label"></label>
+                <input asp-for="Cart.CartPrice" class="form-control CartPrice" readonly="readonly" />
+                <span asp-validation-for="Cart.CartPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cart.CartProductName" class="control-label"></label>
+                <input asp-for="Cart.CartProductName" class="form-control CartName" readonly="readonly" />
+                <span asp-validation-for="Cart.CartProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cart.CartQuantity" class="control-label"></label>
+                <input asp-for="Cart.CartQuantity" class="form-control CartQuantity" onchange="updatePrice()" />
+                <span asp-validation-for="Cart.CartQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cart.CartProductMaterial" class="control-label"></label>
+                <select asp-for="Cart.CartProductMaterial" class="form-control productMaterial" onchange="updateImage()">
+                    <option class="materialPlastic" value="Plastic">Plastic</option>
+                    <option class="materialMetal" value="Metal">Metal</option>
+                    <option class="materialCeramic" value="Ceramic">Ceramic</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-7" style="margin: auto">
+        <img class="productImage" style="height: 200px; width: 200px;" />
+    </div>
+</div>
+<script>
+    function setEditImage() {
+        var name = document.querySelector(".CartName").value;
+        var material = document.querySelector(".productMaterial").value;
+        var image = document.querySelector(".productImage");
+        image.src = `/resources/${material}/${name} ${material}.jpg`;
+    }
+    setEditImage();
+</script>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,63 @@
+﻿@page
+@model FatsShop_2.Pages.ShopCart.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div style="display:inline-block">
+    <h4>Cart</h4>
+    <hr />
+    <dl style="width: 500px; white-space:nowrap">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cart.CartPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cart.CartPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cart.CartQuantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cart.CartQuantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cart.CartProductName)
+        </dt>
+        <dd class="col-sm-10 name">
+            @Html.DisplayFor(model => model.Cart.CartProductName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cart.CartProductMaterial)
+        </dt>
+        <dd class="col-sm-10 material">
+            @Html.DisplayFor(model => model.Cart.CartProductMaterial)
+        </dd>
+        <!--<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cart.Product)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cart.Product.ID)
+        </dd>-->
+    </dl>
+
+</div>
+<div style="margin: auto; display:inline-block;">
+    <img class="productImage" style="height: 200px; width: 200px;margin: auto;" />
+</div>
+<script>
+    function setEditImage() {
+        var name = document.querySelector(".name").innerText;
+        var material = document.querySelector(".material").innerText;
+        var image = document.querySelector(".productImage");
+        image.src = `/resources/${material}/${name} ${material}.jpg`;
+    }
+    setEditImage();
+</script>
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Cart.CartID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
